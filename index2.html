@@ -10,6 +10,8 @@
 </head>
 <body>
     <h1>Todo App</h1>
+    <h2 id="date">Date</h2>
+    
     <div class="todo-input-grid">
          <input id="text-box" class="name-input" placeholder="Add Todo here" />
         <input type="date" id="due-date" class="due-date-input"/>
@@ -19,13 +21,30 @@
     <div id="js-todo-list" class="todo-grid"></div>
 
     <script>
-        
+        // if (typeof(Storage) !== "undefined") {
+//   // Store
+//   localStorage.setItem("todos", JSON.stringify(todoListHTML));
+//   // Retrieve
+//   document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+// } else {
+//   document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+//}
         // const savedTodos = JSON.parse(localStorage.getItem('todos'));
        // Check if it's an array
      //   if (Array.isArray(savedTodos)) {
      //     todos = savedTodos;
      //   } else {
-         const todoList = [{
+
+function displayDate() {
+    let date = new Date();
+    date = date.toString().split(" ");
+    console.log(date)
+    document.querySelector("#date").innerHTML = date[1] + " " + date[2] + ", " + date[3]
+}
+window.onload = function(){
+    displayDate()
+}
+         const todoList = localStorage.getItem("items") ? JSON.parse(localStorage.getItem("items")) : [{
              name: "Wash Car",
              dueDate: "2023-4-28"
          }, {
@@ -74,7 +93,8 @@
              });
             
              inputElement.value = "";
-             //localStorage.setItem('todos', JSON.stringify(todos)); I need to store in local storage
+             localStorage.setItem('items', JSON.stringify(todoList)); 
+             
              renderTodoList();
              // saveTodos()
              
