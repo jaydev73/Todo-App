@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="">
 </head>
 <body>
+    <h1>TODO APP</h1>
+    <h2 id="date"></h2>
     <input id="todo-title" type="text" required>
     <input id="date-picker" type="date">
     <button onclick="addTodo()">ADD TODO</button>
@@ -16,22 +18,33 @@
     
 </body>
 <script>
-    let todos;
-    const savetodos = JSON.parse(localStorage.getItem('todos'));
-    if (Array.isArray(savedTodos)) {
-        todos = saveTodos
-    } else {
-        todos = [{
-        title : "Get groceries",
-        dueDate: "2023-4-16"
-    }];
+    // let todos;
+    // const savetodos = JSON.parse(localStorage.getItem('items))
+    // if(Array.isArray(savedTodos)) {
+    //     todos = saveTodos
+    // } else {
+    //     todos = [{
+    //     title : "Get groceries",
+    //     dueDate: "2023-4-16"
+    // }];
+    // }
+    function  displayCurrentDate() {
+        let date = new Date();
+        date = date.toString().split(" ")
+        console.log(date);
+        document.querySelector("#date").innerHTML = date[0] + " - " + date[1] + ".   " + date[2] + ", " + date[3]
     }
-    
-    
+   window.onload = function(){
+        displayCurrentDate()
+    }
+    const todos = [{
+        title : "Get Groceries",
+        dueDate: "2023-4-15"
+    }]
     
 
     render()
-    savedTodos();
+    // savedTodos();
     function addTodo() {
         const textbox = document.querySelector("#todo-title");
         const title = textbox.value;
@@ -50,9 +63,9 @@
         console.log('delete')
      }   
     }
-    function savedTodos(){
-        localStorage.setItem('todos', JSON.stringify(todos));
-    }
+    // function savedTodos(){
+    //     localStorage.setItem('todos', JSON.stringify(todos));
+    // }
     function render() {
         document.querySelector('#todo-list').innerHTML = '';
         todos.forEach(function (todo){
